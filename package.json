@@ -1,8 +1,14 @@
 {
   "name": "oranch",
   "version": "0.0.1",
+  "description" : "Log tracking module with node",
+  "repository" : {
+	  "type" : "git",
+	  "url"  : "https://github.com/Lewuathe/oranch"
+  },
   "scripts": {
-    "start": "forever start gripper_main.js"
+    "start": "forever start gripper_main.js",
+	"test" : "make test"
   },
   "dependencies": {
       "cron" : "1.0.x"
@@ -11,7 +17,7 @@
 	  "vows" : "0.7.x"
   },
   "engines" : {
-      "node" : "0.10.x",
+      "node" : ">=0.8.x",
       "npm" : "1.2.x"
   }
 }
