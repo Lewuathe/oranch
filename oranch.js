@@ -50,6 +50,9 @@ function grabLog() {
 	var task    = oranch.task;
 	var bufSize = oranch.bufSize;
     fs.open(logfile, 'r', function(err, fd) {
+		if (err) {
+			return err;
+		}
 		var buf = new Buffer(bufSize);
 		initBuffer(buf, bufSize);
 		var offset = 0;
