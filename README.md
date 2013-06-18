@@ -21,6 +21,15 @@ To create oranch object, you should give some options as below.
 * `match`      : Log matching is conditioned by this regular expression.
 * `onComplete` : When oranch stops, this function will be called.
 
+In order to start tracking log, please call `start`.
+    
+    oranch.start();
+    
+When you want to stop oranch log tracking, call `stop`.
+
+    oranch.stop();
+    
+
 ### Example
 
     var Oranch = require('oranch').Oranch;
