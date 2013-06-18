@@ -1,7 +1,8 @@
 oranch  [![Build Status](https://secure.travis-ci.org/Lewuathe/oranch.png)](http://travis-ci.org/Lewuathe/oranch)
 ======
 
-Log file tracker using in node.
+Log file tracker using in node. 
+Installing and using easily as npm module. [npm](https://npmjs.org/package/oranch "npm")
 
 
 ## Get starting
