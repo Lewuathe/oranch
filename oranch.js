@@ -20,19 +20,27 @@ function initBuffer(buf, size) {
 	}
 }
 
-function Oranch(schedule, logfile, match, task, bufSize) {
-    var self      = this;
-	self.schedule = schedule;
-	self.logfile  = logfile;
-	self.match    = match;
-	self.task     = task;
-	self.bufSize  = bufSize ? bufSize : 1000;
-    self.job      = new cronJob(schedule, grabLog, null, false);
+function Oranch(options) {
+	var self        = this;
+	self.schedule   = options.schedule;
+	self.logfile    = options.logfile;
+	self.match      = options.match;
+	self.task       = options.task;
+	self.bufSize    = options.bufSize ? options.bufSize : 1000;
+	self.onComplete = options.onComplete;
+	self.job        = new cronJob(self.schedule, grabLog, self.onComplete, false);
 	self.job.oranch = self;
-
-    self.job.start();
 }
 
+Oranch.prototype.start = function() {
+	var self = this;
+	self.job.start();
+}
+
+Oranch.prototype.stop = function() {
+	var self = this;
+	self.job.stop();
+}
 
 function grabLog() {
 	var self    = this;
