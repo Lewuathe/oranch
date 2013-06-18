@@ -24,7 +24,7 @@ function Oranch(options) {
 	var self        = this;
 	self.schedule   = options.schedule;
 	self.logfile    = options.logfile;
-	self.match      = options.match;
+	self.match      = options.match ? options.match : /.*/;
 	self.task       = options.task;
 	self.bufSize    = options.bufSize ? options.bufSize : 1000;
 	self.onComplete = options.onComplete;
