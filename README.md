@@ -12,6 +12,17 @@ Log file tracker using in node.
 
 ### Usage
 
+### Create oranch object
+To create oranch object, you should give some options as below.
+
+* `schedule`   : Oranch read logfile at fixed interval decided by this parameter. Written in crontab format.
+* `logfile`    : Oranch read this file.
+* `task`       : When log matching is induced, this task will be called.
+* `match`      : Log matching is conditioned by this regular expression.
+* `onComplete` : When oranch stops, this function will be called.
+
+### Example
+
     var Oranch = require('oranch').Oranch;
 	var options = {
 	    'schedule' : '* * * * * *',
