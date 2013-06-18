@@ -13,6 +13,13 @@ function isEnd(line) {
 	}
 }
 
+// Initialization of buffer of null character
+function initBuffer(buf, size) {
+	for (var i = 0; i < size; i++) {
+		buf[i] = '\0';
+	}
+}
+
 function Oranch(schedule, logfile, match, task, bufSize) {
     var self      = this;
 	self.schedule = schedule;
@@ -20,19 +27,23 @@ function Oranch(schedule, logfile, match, task, bufSize) {
 	self.match    = match;
 	self.task     = task;
 	self.bufSize  = bufSize ? bufSize : 1000;
-    self.job      = new cronJob(schedule, self.grabLog, null, false);
+    self.job      = new cronJob(schedule, grabLog, null, false);
+	self.job.oranch = self;
 
     self.job.start();
 }
 
-Oranch.prototype.grabLog = function() {
+
+function grabLog() {
 	var self    = this;
-	var logfile = self.logfile;
-	var match   = self.match;
-	var task    = self.task;
-	var bufSize = self.bufSize;
+	var oranch  = self.oranch;
+	var logfile = oranch.logfile;
+	var match   = oranch.match;
+	var task    = oranch.task;
+	var bufSize = oranch.bufSize;
     fs.open(logfile, 'r', function(err, fd) {
 		var buf = new Buffer(bufSize);
+		initBuffer(buf, bufSize);
 		var offset = 0;
 		fs.read(fd, buf, offset, bufSize, alreadyRead, function(err, bytesRead, buffer) {
 			var lines = buffer.toString().split('\n');
