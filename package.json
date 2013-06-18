@@ -7,6 +7,9 @@
   "dependencies": {
       "cron" : "1.0.x"
    },
+  "devDependencies" : {
+	  "vows" : "0.7.x"
+  },
   "engines" : {
       "node" : "0.10.x",
       "npm" : "1.2.x"
