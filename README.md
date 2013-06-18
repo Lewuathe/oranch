@@ -3,10 +3,6 @@ oranch
 
 Log file tracker using in node.
 
-# Caution
-Sorry, this package is now under development.
-Please wait for some time. Thank you.
-
 
 ## Get starting
 
