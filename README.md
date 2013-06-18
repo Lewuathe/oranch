@@ -1,4 +1,4 @@
-oranch
+oranch  [![Build Status](https://secure.travis-ci.org/Lewuathe/oranch.png)](http://travis-ci.org/Lewuathe/oranch)
 ======
 
 Log file tracker using in node.
