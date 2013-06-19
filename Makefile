@@ -5,10 +5,11 @@ SOURCES = oranch.js
 # ========================================================
 
 VOWS = ./node_modules/.bin/vows -v
-TESTS ?= test/*_test.js
+TESTS ?= test/orach_options_test.js
 
 test:
-	@NODE_ENV=test $(VOWS) $(TESTS)
+	@NODE_ENV=test $(VOWS) test/oranch_matching_test.js
+	@NODE_ENV=test $(VOWS) test/oranch_options_test.js
 
 
 
