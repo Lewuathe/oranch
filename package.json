@@ -1,6 +1,6 @@
 {
   "name": "oranch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description" : "Log tracking module with node",
   "repository" : {
 	  "type" : "git",

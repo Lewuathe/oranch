@@ -1,6 +1,6 @@
 var vows = require('vows');
 var assert = require('assert');
-var Oranch = require('../oranch.js').Oranch;
+var Oranch = require('../index.js').Oranch;
 
 var outs = {};
 function testTask(outName) {
