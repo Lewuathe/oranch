@@ -15,12 +15,19 @@ Installing and using easily as npm module. [npm](https://npmjs.org/package/oranc
 
 ### Create oranch object
 To create oranch object, you should give some options as below.
+Default is cron scheduling.
 
 * `schedule`   : Oranch read logfile at fixed interval decided by this parameter. Written in crontab format.
 * `logfile`    : Oranch read this file.
 * `task`       : When log matching is induced, this task will be called.
 * `match`      : Log matching is conditioned by this regular expression.
 * `onComplete` : When oranch stops, this function will be called.
+
+If your tracking is unfrequent, you should use watchFile API in node.
+watchFile API calls your task funcion in the case of updating logfile.
+So it will be more efficient unfrequent case.
+
+* `jobType`    : If you want to use watchFile API, please set `watch`. Default is `cron`.
 
 In order to start tracking log, please call `start`.
     
