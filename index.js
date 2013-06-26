@@ -25,15 +25,25 @@ function initBuffer(buf, size) {
 
 function Oranch(options) {
 	var self         = this;
+	self.oranch      = self;
 	self.schedule    = options.schedule;
 	self.logfile     = options.logfile;
 	self.match       = options.match ? options.match : /.*/;
 	self.task        = options.task;
 	self.bufSize     = options.bufSize ? options.bufSize : 1000;
 	self.onComplete  = options.onComplete;
-	self.job         = new cronJob(self.schedule, grabLog, self.onComplete, false);
-	self.job.oranch  = self;
 	self.alreadyRead = initAlready(self.logfile);
+
+	if (options.jobType === 'watch') {
+		self.job = fs.watch(self.logfile, function(event, filename) {
+			grabLog.apply(self);
+		});
+	}
+	else {
+		self.job     = new cronJob(self.schedule, grabLog, self.onComplete, false);
+	}
+
+	self.job.oranch   = self;
 }
 
 Oranch.prototype.start = function() {
@@ -44,7 +54,18 @@ Oranch.prototype.start = function() {
 Oranch.prototype.stop = function() {
 	var self = this;
 	writeAlready(alreadyFilePath(self.logfile), self.alreadyRead);
-	self.job.stop();
+	if (self.jobType === 'watch') {
+		fs.unwatchFile(self.logfile);
+	} else {
+		self.job.stop();
+	}
+}
+
+function makeWatchJob(oranch) {
+	fs.watchFile(oranch.logfile, function(curr, prev){
+		console.log(curr);
+		console.log(prev);
+	});
 }
 
 function grabLog() {
