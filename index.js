@@ -61,13 +61,6 @@ Oranch.prototype.stop = function() {
 	}
 }
 
-function makeWatchJob(oranch) {
-	fs.watchFile(oranch.logfile, function(curr, prev){
-		console.log(curr);
-		console.log(prev);
-	});
-}
-
 function grabLog() {
 	var self    = this;
 	var oranch  = self.oranch;
