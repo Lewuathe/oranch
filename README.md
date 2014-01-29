@@ -31,31 +31,35 @@ So it will be more efficient unfrequent case.
 
 In order to start tracking log, please call `start`.
     
-    oranch.start();
-    
+```js
+oranch.start();
+```
+
 When you want to stop oranch log tracking, call `stop`.
 
-    oranch.stop();
-    
+```js
+oranch.stop();
+```
 
 ### Example
 
-    var Oranch = require('oranch').Oranch;
-	var options = {
-	    'schedule' : '* * * * * *',
-		'logfile'  : '/path/to/somelogfile.log',
-		'match'    : /WARN/,
-		'task'     : function () {  
-		    // Write down what you want when WARN log is induced.
-		},
-		'onComplete' : function () {
-		    // Write down what you want when Oranch stops
-		}
-    };
+```js
+var Oranch = require('oranch').Oranch;
+    var options = {
+	'schedule' : '* * * * * *',
+	'logfile'  : '/path/to/somelogfile.log',
+	'match'    : /WARN/,
+	'task'     : function () {  
+        // Write down what you want when WARN log is induced.
+    },
+    'onComplete' : function () {
+        // Write down what you want when Oranch stops
+    }		
+};
 
-	var oranch = new Oranch(options);
-	oranch.start();
-
+var oranch = new Oranch(options);
+oranch.start();
+```
 
 ### License 
 
