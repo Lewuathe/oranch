@@ -18,6 +18,7 @@ vows.describe('Oranch options test').addBatch({
 			options.schedule = '* * * * * *';
 			options.logfile  = __dirname + '/unsetmatch_test.log';
 			options.task     = testTask('unsetmatch_test');
+            options.jobType  = 'cron';
 			options.onComplete = this.callback;
 			var o = new Oranch(options);
 			o.start();
@@ -39,6 +40,7 @@ vows.describe('Oranch options test').addBatch({
 			options.logfile  = __dirname + '/noschedule.log';
 			options.match    = /DEBUG/;
 			options.task     = testTask('noschedule_test');
+            options.jobType  = 'cron';
 			//options.onComplete = this.callback;
 			return new Oranch(options);
 		},

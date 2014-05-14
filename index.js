@@ -34,28 +34,30 @@ function Oranch(options) {
 	self.onComplete  = options.onComplete;
 	self.alreadyRead = initAlready(self.logfile);
 
-	if (options.jobType === 'watch') {
-		self.job = fs.watch(self.logfile, function(event, filename) {
-			grabLog.apply(self);
-		});
-	}
-	else {
+	if (options.jobType == 'cron') {
 		self.job     = new cronJob(self.schedule, grabLog, self.onComplete, false);
+        self.job.oranch = self;
 	}
 
-	self.job.oranch   = self;
+    self.jobType = options.jobType;
 }
 
 Oranch.prototype.start = function() {
 	var self = this;
-	self.job.start();
+    if (self.jobType === 'watch') {
+		self.job = fs.watch(self.logfile, function(event, filename) {
+			grabLog.apply(self);
+		});
+	} else if (self.jobType == 'cron') {
+        self.job.start();
+    }
 }
 
 Oranch.prototype.stop = function() {
 	var self = this;
 	writeAlready(alreadyFilePath(self.logfile), self.alreadyRead);
 	if (self.jobType === 'watch') {
-		fs.unwatchFile(self.logfile);
+        self.job.close();
 	} else {
 		self.job.stop();
 	}
@@ -114,7 +116,6 @@ function writeAlready (alreadyFile, alreadyRead) {
 function readAlready (alreadyFile) {
 	return parseInt(fs.readFileSync(alreadyFile));
 }
-
 
 exports.Oranch = Oranch;
 
