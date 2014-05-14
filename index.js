@@ -33,13 +33,12 @@ function Oranch(options) {
 	self.bufSize     = options.bufSize ? options.bufSize : 1000;
 	self.onComplete  = options.onComplete;
 	self.alreadyRead = initAlready(self.logfile);
+    self.jobType     = options.jobType ? options.jobType : 'cron';
 
 	if (options.jobType == 'cron') {
 		self.job     = new cronJob(self.schedule, grabLog, self.onComplete, false);
         self.job.oranch = self;
 	}
-
-    self.jobType = options.jobType;
 }
 
 Oranch.prototype.start = function() {
