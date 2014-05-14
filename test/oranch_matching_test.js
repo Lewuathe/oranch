@@ -17,6 +17,7 @@ vows.describe('Oranch matching test').addBatch({
 			options.schedule = '* * * * * *';
 			options.logfile  = __dirname + '/match_test.log';
 			options.match    = /DEBUG/;
+            options.jobType  = "cron";
 			options.task     = testTask('match_test');
 			options.onComplete = this.callback;
 			var o = new Oranch(options);
@@ -40,6 +41,7 @@ vows.describe('Oranch matching test').addBatch({
 			options.logfile  = __dirname + '/nomatch_test.log';
 			options.match    = /DEBUG/;
 			options.task     = testTask('nomatch_test');
+            options.jobType  = 'cron';
 			options.onComplete = this.callback;
 			var o = new Oranch(options);
 			o.start();
