@@ -1,13 +1,13 @@
 {
   "name": "oranch",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description" : "Log tracking module with node",
   "repository" : {
 	  "type" : "git",
 	  "url"  : "https://github.com/Lewuathe/oranch"
   },
   "scripts": {
-	"test" : "make test"
+	"test" : "rm -rf ./alreadys/*; make test"
   },
   "dependencies": {
       "cron" : "1.0.x"

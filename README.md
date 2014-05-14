@@ -49,7 +49,7 @@ var Oranch = require('oranch').Oranch;
 	'schedule' : '* * * * * *',
 	'logfile'  : '/path/to/somelogfile.log',
 	'match'    : /WARN/,
-	'task'     : function () {  
+	'task'     : function (line) {  
         // Write down what you want when WARN log is induced.
     },
     'onComplete' : function () {
