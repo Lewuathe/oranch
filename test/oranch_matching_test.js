@@ -53,7 +53,30 @@ vows.describe('Oranch matching test').addBatch({
 			var expect = '';
 			assert.equal(expect, outs['nomatch_test']);
 		}
-	}
+	},
+
+    'Initial task' : {
+		topic : function () {
+			outs['initial_task_test'] = '';
+			var options = {};
+			options.schedule = '* * * * * *';
+			options.logfile  = __dirname + '/initial_task_test.log';
+			options.match    = /DEBUG/;
+			options.task     = testTask('initial_task_test');
+            options.jobType  = 'cron';
+			options.onComplete = this.callback;
+			var o = new Oranch(options);
+			o.start();
+			setTimeout(function () {
+				o.stop();
+			}, 2000);
+		},
+		'cannot grab DEBUG log' : function () {
+			var expect = 'Mon Jun 10 2013 11:16:55 GMT+0900 (JST): [DEBUG] - log15\n';
+			assert.equal(expect, outs['initial_task_test']);
+		}
+    }
+	
 
 }).export(module);
 

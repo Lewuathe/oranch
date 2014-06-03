@@ -44,6 +44,7 @@ function Oranch(options) {
 Oranch.prototype.start = function() {
 	var self = this;
     if (self.jobType === 'watch') {
+        grabLog.apply(self);
 		self.job = fs.watch(self.logfile, function(event, filename) {
 			grabLog.apply(self);
 		});
