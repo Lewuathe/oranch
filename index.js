@@ -29,6 +29,7 @@ function Oranch(options) {
 	self.schedule    = options.schedule;
 	self.logfile     = options.logfile;
 	self.match       = options.match ? options.match : /.*/;
+    self.endMatch    = options.endMatch;
 	self.task        = options.task;
 	self.bufSize     = options.bufSize ? options.bufSize : 1000;
 	self.onComplete  = options.onComplete;
@@ -68,6 +69,7 @@ function grabLog() {
 	var oranch  = self.oranch;
 	var logfile = oranch.logfile;
 	var match   = oranch.match;
+    var endMatch = oranch.endMatch;
 	var task    = oranch.task;
 	var bufSize = oranch.bufSize;
     fs.open(logfile, 'r', function(err, fd) {
@@ -84,6 +86,11 @@ function grabLog() {
 				if (isEnd(curLine)) {
 					break;
 				}
+                if (endMatch != undefined && curLine.match(endMatch)) {
+                    oranch.onComplete();
+                    oranch.stop();
+                    break;
+                }
 				if (curLine.match(match)) {
 					task(curLine);
 				}

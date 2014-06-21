@@ -7,7 +7,7 @@
 	  "url"  : "https://github.com/Lewuathe/oranch"
   },
   "scripts": {
-	"test" : "rm -rf ./alreadys/*; make test"
+	"test" : "rm -rf ./alreadys/*; node_modules/vows/bin/vows test/*_test.js --spec "
   },
   "dependencies": {
       "cron" : "1.0.x"
