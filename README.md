@@ -22,6 +22,7 @@ Default is cron scheduling.
 * `task`       : When log matching is induced, this task will be called.
 * `jobType`    : If you want to use watch file API, set `watch` or with cron scheduler set `cron`.
 * `match`      : Log matching is conditioned by this regular expression.
+* `endMatch`   : With this options you can finish job when this tag matches
 * `onComplete` : When oranch stops, this function will be called.
 
 These are all required parameters.
