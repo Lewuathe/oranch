@@ -49,5 +49,28 @@ vows.describe('Oranch options test').addBatch({
 				topic.start();
 			}, Error);
 		}
-	}
+	},
+
+    'offset zero': {
+        topic: function() {
+            outs['offset_zero_test'] = '';
+            var options = {};
+            options.schedule = '* * * * * *';
+            options.logfile = __dirname + '/offset_zero_test.log',
+            options.task    = testTask('offset_zero_test');
+            options.onComplete = this.callback;
+            options.offset = 776;
+            options.jobType = 'cron';
+            var o = new Oranch(options);
+            o.start();
+            setTimeout(function() {
+                o.stop();
+            }, 2000);
+        },
+
+        'alreadyRead is zero' : function() {
+            var expect = 'Mon Jun 10 2013 11:16:55 GMT+0900 (JST): [DEBUG] - log15\n';
+            assert.equal(expect, outs['offset_zero_test']);     
+        }
+    }
 }).export(module);

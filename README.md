@@ -23,6 +23,7 @@ Default is cron scheduling.
 * `jobType`    : If you want to use watch file API, set `watch` or with cron scheduler set `cron`.
 * `match`      : Log matching is conditioned by this regular expression.
 * `endMatch`   : With this options you can finish job when this tag matches
+* `offset`     : If you want to off default `already` files, oranch starts reading as you like by this offset.
 * `onComplete` : When oranch stops, this function will be called.
 
 These are all required parameters.

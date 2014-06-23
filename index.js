@@ -33,7 +33,7 @@ function Oranch(options) {
 	self.task        = options.task;
 	self.bufSize     = options.bufSize ? options.bufSize : 1000;
 	self.onComplete  = options.onComplete;
-	self.alreadyRead = initAlready(self.logfile);
+	self.alreadyRead = options.offset ? options.offset : initAlready(self.logfile);
     self.jobType     = options.jobType ? options.jobType : 'cron';
 
 	if (options.jobType == 'cron') {
