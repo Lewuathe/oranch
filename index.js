@@ -80,7 +80,7 @@ function grabLog() {
 		initBuffer(buf, bufSize);
 		var offset = 0;
 		fs.read(fd, buf, offset, bufSize, oranch.alreadyRead, function(err, bytesRead, buffer) {
-			var lines = buffer.toString().split('\n');
+			var lines = buffer.slice(0, bytesRead).toString().split('\n');
 			for( var lineIndex = 0; lineIndex < lines.length-1; lineIndex++ ) {
 				var curLine = lines[lineIndex];
 				if (isEnd(curLine)) {
